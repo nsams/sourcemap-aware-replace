@@ -1,0 +1,33 @@
+{
+  "name": "sourcemap-aware-replace",
+  "version": "0.1.0",
+  "description": "replace strings in generated files and update sourcemap",
+  "keywords": [
+    "sourcemap",
+    "source-map"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nsams/sourcemap-aware-replace.git"
+  },
+  "main": "index.js",
+  "bin": {
+    "sourcemap-aware-replace": "bin/sourcemap-aware-replace"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "Niko Sams",
+    "email": "niko.sams@gmail.com"
+  },
+  "license": "BSD",
+  "dependencies": {
+    "source-map": "~0.1.31",
+    "commander": "~2.1.0"
+  },
+  "bugs": {
+    "url": "https://github.com/nsams/sourcemap-aware-replace/issues"
+  },
+  "homepage": "https://github.com/nsams/sourcemap-aware-replace"
+}
