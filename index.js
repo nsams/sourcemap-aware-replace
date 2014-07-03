@@ -25,13 +25,15 @@ function main()
     var filePos = 0;
     src.split('\n').forEach(function(line) {
         lineNum++;
-        while ((pos = line.indexOf(searchString)) != -1) {
+        var searchPos = 0;
+        while ((pos = line.indexOf(searchString, searchPos)) != -1) {
             src = src.substring(0, filePos+pos) + replaceString + src.substring(filePos+pos+searchString.length);
             line = line.substring(0, pos) + replaceString + line.substring(pos+searchString.length);
             replacements.push({
                 line: lineNum,
                 column: pos
             });
+            searchPos = pos + replaceString.length;
         }
         filePos += line.length + 1;
     });
