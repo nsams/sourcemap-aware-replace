@@ -4,19 +4,15 @@ var
   fs = require( "fs" ),
   writeFileSync = fs.writeFileSync,
   readFileSync = fs.readFileSync,
-  program = require( "commander" ),
   path = require('path');
 
-function main()
+function replace(inMap, outFile, searchString, replaceString)
 {
-    var mapping = JSON.parse( readFileSync(program.inMap) );
+    var mapping = JSON.parse( readFileSync(inMap) );
     var generator = new SourceMapGenerator({
-        file: program.outFile
+        file: outFile
     });
     var map = new SourceMapConsumer( mapping );
-
-    var searchString = program.search;
-    var replaceString = program.replace;
 
     var pos;
     var replacements = [];
@@ -60,18 +56,9 @@ function main()
         return generator.addMapping(mapping);
     });
 
-    writeFileSync(program.outFile, src, 'utf-8');
-    return writeFileSync(program.outFile+".map", generator.toString(), 'utf-8');
+    writeFileSync(outFile, src, 'utf-8');
+    return writeFileSync(outFile+".map", generator.toString(), 'utf-8');
 
 }
 
-program
-  .version( require( "./package.json" ).version )
-  .usage( "[options] <source-map>" )
-  .option( "--in-map <path>", "path to input source map file" )
-  .option( "--out-file <path>", "path to output file" )
-  .option( "--search <string>", "search for this string" )
-  .option( "--replace <string>", "replace with this string" )
-  .parse( process.argv );
-
-main();
+module.exports = replace;
