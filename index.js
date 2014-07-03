@@ -42,18 +42,22 @@ function replace(inMap, outFile, searchString, replaceString)
                 mapping.generatedColumn -= offs;
             }
         });
-        mapping = {
-            generated: {
-                line: mapping.generatedLine,
-                column: mapping.generatedColumn
-            },
-            original: {
-                line: mapping.originalLine,
-                column: mapping.originalColumn
-            },
-            source: mapping.source
-        };
-        return generator.addMapping(mapping);
+        if (mapping.source) {
+            var newMapping = {
+                generated: {
+                    line: mapping.generatedLine,
+                    column: mapping.generatedColumn
+                },
+                original: {
+                    line: mapping.originalLine,
+                    column: mapping.originalColumn
+                },
+                source: mapping.source
+            };
+            return generator.addMapping(newMapping);
+        } else {
+            return mapping;
+        }
     });
 
     writeFileSync(outFile, src, 'utf-8');
